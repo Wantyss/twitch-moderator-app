@@ -1,4 +1,6 @@
 // renderer.js — логика интерфейса
+// renderer.js — логика интерфейса
+(() => {
 const api = window.api;
 const $ = (id) => document.getElementById(id);
 
@@ -176,4 +178,5 @@ $('word-list').addEventListener('click', async (e) => {
 
   setStatus({ state: 'stopped', channel: '' });
   setInterval(tickUptime, 1000);
+})();
 })();

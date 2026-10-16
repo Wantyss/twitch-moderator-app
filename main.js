@@ -294,6 +294,10 @@ function createWindow() {
     },
   });
   win.loadFile('index.html');
+  // F12 — консоль разработчика (для отладки)
+win.webContents.on('before-input-event', (_e, input) => {
+  if (input.type === 'keyDown' && input.key === 'F12') win.webContents.toggleDevTools();
+});
   win.on('closed', () => { win = null; });
 }
 
