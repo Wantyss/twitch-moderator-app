@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'">
+  <title>Wanty Moderator</title>
+  <!-- Шрифты: если интернета нет или шрифт не загрузился, используются системные -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Заголовок -->
+    <header class="top">
+      <h1>Wanty Moderator</h1>
+      <div class="status">
+        <span class="dot stopped" id="status-dot"></span>
+        <span id="status-text">Бот остановлен</span>
+      </div>
+    </header>
+
+    <!-- Кнопки управления -->
+    <div class="controls">
+      <button class="btn primary" id="btn-start">Запустить</button>
+      <button class="btn secondary" id="btn-stop" disabled>Остановить</button>
+    </div>
+
+    <main class="grid">
+
+      <!-- Настройки (слева) -->
+      <section class="card settings">
+        <h2>Настройки</h2>
+
+        <label class="field">
+          <span>Twitch Token</span>
+          <div class="input-wrap">
+            <input type="password" id="token" autocomplete="off" spellcheck="false" placeholder="OAuth-токен бота">
+            <button type="button" class="eye-btn" id="toggle-token" title="Показать / скрыть">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+                <line class="slash" x1="3" y1="3" x2="21" y2="21"></line>
+              </svg>
+            </button>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Ник бота</span>
+          <input type="text" id="nick" autocomplete="off" spellcheck="false" placeholder="mybot">
+        </label>
+
+        <label class="field">
+          <span>Канал</span>
+          <input type="text" id="channel" autocomplete="off" spellcheck="false" placeholder="streamer">
+        </label>
+
+        <label class="check">
+          <input type="checkbox" id="timeout">
+          <span>Давать таймаут на 10 секунд</span>
+        </label>
+
+        <button class="btn primary wide" id="btn-save">Сохранить настройки</button>
+      </section>
+
+      <!-- Список слов (по центру) -->
+      <section class="card words">
+        <h2 id="words-title">Запрещённые слова (0)</h2>
+        <ul class="word-list" id="word-list"></ul>
+        <div class="add-row">
+          <input type="text" id="word-input" autocomplete="off" spellcheck="false" placeholder="Слово или фраза">
+          <button class="btn primary" id="btn-add">+ Добавить</button>
+        </div>
+        <p class="note hidden" id="words-note"></p>
+        <p class="format-hint">Форматы: слово · слово* (с окончаниями) · *слово* (подстрока)</p>
+      </section>
+
+      <!-- Статистика (справа) -->
+      <aside class="stats">
+        <div class="card stat">
+          <span class="stat-label">Удалено сообщений</span>
+          <span class="stat-value" id="stat-deleted">0</span>
+        </div>
+        <div class="card stat">
+          <span class="stat-label">Таймаутов</span>
+          <span class="stat-value" id="stat-timeouts">0</span>
+        </div>
+        <div class="card stat">
+          <span class="stat-label">Время работы</span>
+          <span class="stat-value mono" id="stat-uptime">00:00:00</span>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Лог (снизу) -->
+    <section class="card log">
+      <div class="log-head">
+        <h2>Лог событий</h2>
+        <button class="btn secondary small" id="btn-clear">Очистить лог</button>
+      </div>
+      <div class="log-body" id="log-body"></div>
+    </section>
+
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>

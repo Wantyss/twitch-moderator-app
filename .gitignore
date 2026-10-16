@@ -1,0 +1,9 @@
+node_modules/
+dist/
+settings.json
+moderation.log
+.env
+__pycache__/
+*.pyc
+venv/
+.venv/
